@@ -125,6 +125,7 @@
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Converter.cpp" />
+    <ClCompile Include="Delete.cpp" />
     <ClCompile Include="GlobalValues.cpp" />
     <ClCompile Include="Password.cpp" />
     <ClCompile Include="Validate.cpp" />
@@ -141,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="Client.h" />
     <ClInclude Include="Converter.h" />
+    <ClInclude Include="Delete.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="GlobalValues.h" />
     <ClInclude Include="Password.h">
       <FileType>CppForm</FileType>
@@ -156,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Chat.resx">
       <DependentUpon>Chat.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete.resx">
+      <DependentUpon>Delete.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Password.resx">
       <DependentUpon>Password.h</DependentUpon>

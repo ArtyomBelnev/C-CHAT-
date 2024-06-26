@@ -188,6 +188,7 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 
 	if (MessageVector[1] == "!Create" && MessageVector.size() < 3)
 	{
+		std::cout << "!Create" << std::endl;
 		Message = "Wrong command. You have to specify room name and password\nCommand usage: create room_name room_password";
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
@@ -195,7 +196,8 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 
 	if (MessageVector[1] == "!Remove" && MessageVector.size() >= 4)
 	{
-		Message = "You are remove room: " + MessageVector[1];
+		std::cout << "!Remove" << std::endl;
+		Message = "!RemoveRoom " + MessageVector[2];
 
 		bool WasThisRoom = false;
 		for (auto it = Rooms.begin(); it != Rooms.end(); it++)
@@ -222,6 +224,7 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 
 	if (MessageVector[1] == "!Remove" && MessageVector.size() < 4)
 	{
+		std::cout << "!Remove" << std::endl;
 		Message = "Wrong command. You have to specify room name and password\nCommand usage: remove room_name room_password";
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
@@ -231,6 +234,27 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 	{
 		std::cout << "!Check" << std::endl;
 		Message = "!CheckRoom " + MessageVector[2];
+
+		bool IsCorrectData = false;
+		for (int i = 0; i < Rooms.size(); i++)
+		{
+			if (Rooms[i].Name == MessageVector[2] && Rooms[i].Password == MessageVector[3])
+			{
+				IsCorrectData = true;
+				break;
+			}
+		}
+		if (IsCorrectData == false)
+			Message = "!Wrong room password";
+
+		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
+		return;
+	}
+
+	if (MessageVector[1] == "!CheckRemove" && MessageVector.size() >= 4)
+	{
+		std::cout << "!CheckRemoveRoom" << std::endl;
+		Message = "!CheckRemoveRoom " + MessageVector[2];
 
 		bool IsCorrectData = false;
 		for (int i = 0; i < Rooms.size(); i++)

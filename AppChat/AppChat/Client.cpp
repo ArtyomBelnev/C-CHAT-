@@ -1,6 +1,5 @@
 #include "Client.h"
 #include "Chat.h"
-#include "Password.h"
 
 #include "Converter.h"
 #include "GlobalValues.h"
@@ -11,7 +10,7 @@ using namespace std;
 #define MaxMessageLength 256
 
 bool IsDebug = true;
-bool bIndex = true;
+//bool bIndex = true;
 
 
 SOCKET Connection = INVALID_SOCKET;
@@ -79,6 +78,11 @@ void ClientHandler()
 			continue;
 		}
 
+		if (MessageVector[0] == CheckRemoveRoom) {
+			isRemove = true;
+			continue;
+		}
+
 		if (MessageVector[0] == Wrong) {
 			AppChat::MessageBox::Show(Convert_char_to_String(msg));
 			continue;
@@ -86,16 +90,17 @@ void ClientHandler()
 
 
 		if (MessageVector[0] == List) {
+
 			AppChat::Chat::listRooms->Items->Clear();
 
 			for (int i = 1; i < MessageVector.size() - 1; i++)
 			{
 				AppChat::Chat::listRooms->Items->Add(Convert_string_to_String(MessageVector[i]));
 			}
-			if (bIndex) {
+			/*if (bIndex) {
 			AppChat::Chat::listRooms->SelectedIndex = 0;
 				bIndex = false;
-			}
+			}*/
 			continue;
 		}
 
@@ -104,6 +109,12 @@ void ClientHandler()
 			AppChat::Chat::labelChat->Text = Convert_string_to_String(MessageVector[2]);
 			continue;
 		}
+
+		if (MessageVector[0] == RemoveRoom) {
+			AppChat::Chat::listRooms->SelectedIndex = -1;
+			continue;
+		}
+
 
 
 

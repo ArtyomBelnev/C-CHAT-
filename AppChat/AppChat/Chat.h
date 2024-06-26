@@ -31,35 +31,10 @@ namespace AppChat {
 			//listRooms->SelectedIndex = 0;
 			this->Text = nickName;
 		}
-
-		static System::Windows::Forms::RichTextBox^ globalChat;
+	static System::Windows::Forms::RichTextBox^ globalChat;
 	static System::Windows::Forms::Label^ countOnline;
 	static System::Windows::Forms::ComboBox^ listRooms;
 	static System::Windows::Forms::Label^ labelChat;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//static System::Windows::Forms::RichTextBox^ globalChat;
-	//static System::Windows::Forms::Label^ countOnline;
-	//static System::Windows::Forms::ComboBox^ listRooms;
-	//static System::Windows::Forms::Label^ labelChat;
-
-
-
-
-
-
 
 
 
@@ -67,8 +42,9 @@ namespace AppChat {
 	private: System::Windows::Forms::ToolStripComboBox^ toolStripComboBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ btnAddRoom;
+	private: System::Windows::Forms::Button^ btnDeleteRoom;
 
-	private: System::Windows::Forms::Button^ button2;
+
 	private: System::Windows::Forms::Button^ btnOpenRoom;
 	public: System::Windows::Forms::Label^ label3;
 	private:
@@ -128,7 +104,7 @@ namespace AppChat {
 			this->toolStripComboBox1 = (gcnew System::Windows::Forms::ToolStripComboBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->btnAddRoom = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->btnDeleteRoom = (gcnew System::Windows::Forms::Button());
 			this->btnOpenRoom = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->countOnline = (gcnew System::Windows::Forms::Label());
@@ -224,17 +200,18 @@ namespace AppChat {
 			this->btnAddRoom->UseVisualStyleBackColor = true;
 			this->btnAddRoom->Click += gcnew System::EventHandler(this, &Chat::btnAddRoom_Click);
 			// 
-			// button2
+			// btnDeleteRoom
 			// 
-			this->button2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.BackgroundImage")));
-			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->button2->FlatAppearance->BorderSize = 0;
-			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Location = System::Drawing::Point(149, 28);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(15, 15);
-			this->button2->TabIndex = 24;
-			this->button2->UseVisualStyleBackColor = true;
+			this->btnDeleteRoom->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnDeleteRoom.BackgroundImage")));
+			this->btnDeleteRoom->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->btnDeleteRoom->FlatAppearance->BorderSize = 0;
+			this->btnDeleteRoom->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnDeleteRoom->Location = System::Drawing::Point(149, 28);
+			this->btnDeleteRoom->Name = L"btnDeleteRoom";
+			this->btnDeleteRoom->Size = System::Drawing::Size(15, 15);
+			this->btnDeleteRoom->TabIndex = 24;
+			this->btnDeleteRoom->UseVisualStyleBackColor = true;
+			this->btnDeleteRoom->Click += gcnew System::EventHandler(this, &Chat::btnDeleteRoom_Click);
 			// 
 			// btnOpenRoom
 			// 
@@ -288,7 +265,7 @@ namespace AppChat {
 			this->Controls->Add(this->countOnline);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->btnOpenRoom);
-			this->Controls->Add(this->button2);
+			this->Controls->Add(this->btnDeleteRoom);
 			this->Controls->Add(this->btnAddRoom);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->listRooms);
@@ -316,5 +293,6 @@ namespace AppChat {
 	private: System::Void btnAddRoom_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnOpenRoom_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void globalChat_TextChanged(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void btnDeleteRoom_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

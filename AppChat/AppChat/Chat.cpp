@@ -2,6 +2,8 @@
 #include "Client.h"
 #include "Add.h"
 #include "Password.h"
+#include "Delete.h"
+
 
 #include "Converter.h"
 #include "GlobalValues.h"
@@ -60,6 +62,25 @@ System::Void AppChat::Chat::btnOpenRoom_Click(System::Object^ sender, System::Ev
 	password->ShowDialog();
 	}
 }
+
+System::Void AppChat::Chat::btnDeleteRoom_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	string nickName;
+	Convert_String_to_string(this->Text->ToString() + " ", nickName);
+
+	if (AppChat::Chat::listRooms->Text == "ALL") {
+		MessageBox::Show("The ALL room cannot be deleted!!!");
+	}
+	else if (AppChat::Chat::listRooms->Text == AppChat::Chat::labelChat->Text) {
+		MessageBox::Show("You can't delete the room you're in!!!");
+	}
+	else {
+		Delete^ deleteRoom = gcnew Delete(this->Text, AppChat::Chat::listRooms->Text);
+
+		deleteRoom->ShowDialog();
+	}
+}
+
 
 System::Void AppChat::Chat::globalChat_TextChanged(System::Object^ sender, System::EventArgs^ e)
 {
