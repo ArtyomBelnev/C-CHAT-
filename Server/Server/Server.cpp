@@ -58,7 +58,6 @@ std::vector<std::string> Split(std::string StringToSplit, std::string SplitterSt
 	return ReturnVector;
 }
 
-/// Only first element
 template <class T>
 void RemoveElementFromVectorByName(std::vector<T>& Vector, T Value)
 {
@@ -128,50 +127,21 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 					continue;
 				}
 			}
-
-
-
-			/*for (int i = 0; i <= Rooms.size() - 1; i++)
-			{
-				for (int y = 0; y <= Rooms[i].Users.size() - 1; y++)
-				{
-					if (Rooms[i].Users.size() == 0) continue;
-
-					int user = Rooms[i].Users[y];
-
-					std::string sizeUser = "Online " + std::to_string(Rooms[i].Users.size());
-
-					send(Connections[user], sizeUser.c_str(), MaxMessageLength, NULL);
-					continue;
-				}*/
-			//}
-
-			/*for (int i = 0; i <= Rooms.size() - 1; i++)
-				{
-					for (int y = 0; y <= Rooms[i].Users.size() - 1; y++)
-					{
-						int user = Rooms[i].Users[y];
-
-						std::string sizeUser = "Online " + std::to_string(Rooms[i].Users.size());
-
-						send(Connections[user], sizeUser.c_str(), MaxMessageLength, NULL);
-						continue;
-					}
-				}*/
 		return;
 	}
 
 	if (MessageVector[1] == "!Create" && MessageVector.size() >= 3)
 	{
-
 		std::cout << "!Create" << std::endl;
-		Message = "You are created room: " + MessageVector[1];
+		Message = "!Created room: " + MessageVector[1];
+
 		bool IsTakenName = false;
+
 		for (auto it = Rooms.begin(); it != Rooms.end(); it++)
 		{
-			if ((*it).Name == MessageVector[1])
+			if ((*it).Name == MessageVector[2])
 			{
-				Message = "This room name alredy taken";
+				Message = "!Wrong >this room name alredy taken";
 				IsTakenName = true;
 				break;
 			}
@@ -189,7 +159,7 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 	if (MessageVector[1] == "!Create" && MessageVector.size() < 3)
 	{
 		std::cout << "!Create" << std::endl;
-		Message = "Wrong command. You have to specify room name and password\nCommand usage: create room_name room_password";
+		Message = "!Wrong >you have to specify room name and password\nCommand usage: create room_name room_password";
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
 	}
@@ -211,12 +181,12 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 					break;
 				}
 				else
-					Message = "Wrong password";
+					Message = "!Wrong >password";
 			}
 		}
 
 		if (WasThisRoom == false)
-			Message = "Wrong name";
+			Message = "!Wrong >name";
 
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
@@ -225,7 +195,7 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 	if (MessageVector[1] == "!Remove" && MessageVector.size() < 4)
 	{
 		std::cout << "!Remove" << std::endl;
-		Message = "Wrong command. You have to specify room name and password\nCommand usage: remove room_name room_password";
+		Message = "!Wrong >you have to specify room name and password\nCommand usage: remove room_name room_password";
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
 	}
@@ -245,7 +215,7 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 			}
 		}
 		if (IsCorrectData == false)
-			Message = "!Wrong room password";
+			Message = "!Wrong >room password";
 
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
@@ -257,16 +227,23 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 		Message = "!CheckRemoveRoom " + MessageVector[2];
 
 		bool IsCorrectData = false;
+
 		for (int i = 0; i < Rooms.size(); i++)
 		{
 			if (Rooms[i].Name == MessageVector[2] && Rooms[i].Password == MessageVector[3])
 			{
 				IsCorrectData = true;
+
+				if (Rooms[i].Users.size() != 0) {
+					Message = "!Wrong >the room is occupied";
+				}
+
 				break;
 			}
 		}
 		if (IsCorrectData == false)
-			Message = "!Wrong room password";
+			Message = "!Wrong >room password";
+
 
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
@@ -302,7 +279,7 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 
 	if (MessageVector[1] == "!Open" && MessageVector.size() < 4)
 	{
-		Message = "Wrong command. You have to specify room name and password\nCommand usage: open room_name room_password";
+		Message = "!Wrong >you have to specify room name and password\nCommand usage: open room_name room_password";
 		send(Connections[UserId], Message.c_str(), MaxMessageLength, NULL);
 		return;
 	}
@@ -311,6 +288,8 @@ void MessageHandler(int UserId, char msg[MaxMessageLength], int* RoomId)
 	{
 
 		std::cout << "!Write" << std::endl;
+		std::cout << msg << std::endl;
+
 		for (int it : Rooms[*RoomId].Users)
 		{
 			//if (UserId != it)

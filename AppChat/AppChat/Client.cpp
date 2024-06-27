@@ -88,6 +88,10 @@ void ClientHandler()
 			continue;
 		}
 
+		if (MessageVector[0] == Created) {
+			continue;
+		}
+
 
 		if (MessageVector[0] == List) {
 
@@ -114,8 +118,6 @@ void ClientHandler()
 			AppChat::Chat::listRooms->SelectedIndex = -1;
 			continue;
 		}
-
-
 
 
 		AppChat::Chat::globalChat->Text += Convert_char_to_String(msg) + "\n";

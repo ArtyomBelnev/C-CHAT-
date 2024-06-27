@@ -4,9 +4,11 @@
 #include "Password.h"
 #include "Delete.h"
 
-
 #include "Converter.h"
 #include "GlobalValues.h"
+
+
+
 
 
 System::Void AppChat::Chat::Chat_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
@@ -23,9 +25,22 @@ System::Void AppChat::Chat::btnSend_Click(System::Object^ sender, System::EventA
 	string messageSend;
 	Convert_String_to_string(textBoxSend->Text->ToString(), messageSend);
 
-	if (textBoxSend->Text->Length != 0) {
+	for (int i = messageSend.size() - 1 ; i >= 0; --i)
+	{	
+		if (messageSend[i] == ' ' || messageSend[i] == '\n') {
+			messageSend.erase(i, 1);
+			break;
+		}
+	}
+
+	messageSend.erase(0, messageSend.find_first_not_of(" "));
+
+	if (textBoxSend->Text->Length != 0 && messageSend.size() != 0) {
 	sendMessage(nickName + messageSend);
 	textBoxSend->Text = "";
+	}
+	else {
+		textBoxSend->Text = "";
 	}
 }
 
@@ -78,6 +93,13 @@ System::Void AppChat::Chat::btnDeleteRoom_Click(System::Object^ sender, System::
 		Delete^ deleteRoom = gcnew Delete(this->Text, AppChat::Chat::listRooms->Text);
 
 		deleteRoom->ShowDialog();
+	}
+}
+
+System::Void AppChat::Chat::textBoxSend_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+{
+	if (e->KeyChar == (char)Keys::Enter) {
+		btnSend_Click(this, e);
 	}
 }
 

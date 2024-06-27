@@ -36,6 +36,15 @@ namespace AppChat {
 	static System::Windows::Forms::ComboBox^ listRooms;
 	static System::Windows::Forms::Label^ labelChat;
 
+	/*static System::Windows::Forms::RichTextBox^ globalChat;
+	static System::Windows::Forms::Label^ countOnline;
+	static System::Windows::Forms::ComboBox^ listRooms;
+	static System::Windows::Forms::Label^ labelChat;*/
+
+
+
+
+
 
 
 	private: System::Windows::Forms::ContextMenuStrip^ contextMenuStrip1;
@@ -147,6 +156,7 @@ namespace AppChat {
 			this->textBoxSend->Size = System::Drawing::Size(323, 96);
 			this->textBoxSend->TabIndex = 14;
 			this->textBoxSend->Text = L"";
+			this->textBoxSend->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Chat::textBoxSend_KeyPress);
 			// 
 			// btnSend
 			// 
@@ -294,5 +304,6 @@ namespace AppChat {
 	private: System::Void btnOpenRoom_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void globalChat_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnDeleteRoom_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void textBoxSend_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 };
 }

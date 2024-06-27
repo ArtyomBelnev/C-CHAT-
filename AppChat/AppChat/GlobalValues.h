@@ -9,6 +9,7 @@ extern string ALLpassword;
 
 extern string Online;
 extern string Opened;
+extern string Created;
 extern string Wrong;
 extern string CheckRoom;
 extern string RemoveRoom;

@@ -5,10 +5,12 @@ string ALLpassword = "123";
 
 string Online = "!Online";
 string Opened = "!Opened";
+string Created = "!Created";
 string Wrong = "!Wrong";
 string CheckRoom = "!CheckRoom";
 string RemoveRoom = "!RemoveRoom";
 string CheckRemoveRoom = "!CheckRemoveRoom";
+
 
 
 

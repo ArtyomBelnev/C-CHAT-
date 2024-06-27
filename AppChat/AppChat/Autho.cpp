@@ -142,6 +142,7 @@ System::Void AppChat::Autho::boxNickName_KeyPress(System::Object^ sender, System
         currentText += e->KeyChar;
     }
 
+
     string strNameNICKNAME;
     Convert_String_to_string(currentText, strNameNICKNAME);
 
@@ -159,6 +160,7 @@ System::Void AppChat::Autho::boxNickName_KeyPress(System::Object^ sender, System
         if (!isBtnConnect()) btnConnect->Enabled = false;
     }
 }
+
 
 
   
