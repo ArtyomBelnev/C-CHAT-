@@ -128,6 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Validate.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Validate.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
